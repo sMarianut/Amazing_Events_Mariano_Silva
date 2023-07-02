@@ -12,19 +12,19 @@
 </head>
 
 <body class="bg-info-subtle">
-    <header>
-        <div class="contenedor d-flex col-12">
-            <nav class="navbar navbar-expand-lg bg-body-tertiary col-12">
+    <header class="container-fluid">
+        <div class="contenedor d-flex col-12 rounded">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary col-12 rounded">
                 <div class="container-fluid">
                     <img class="navbar-brand img-fluid col-2" src="./assets/images/amazing_brand.png" alt="Logo">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div class="collapse navbar-collapse position-relative" id="navbarNav">
+                    <div class="collapse navbar-collapse position-relative justify-content-end" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link active text-center text-primary-emphasis shadow p-3"
+                                <a class="nav-link disabled text-center text-primary-emphasis shadow p-3"
                                     aria-current="page" href="#">Home</a>
                             </li>
                             <li class="nav-item">
@@ -56,7 +56,9 @@
             <div id="carouselExampleFade" class="carousel slide carousel-fade col-12">
 
                 <div class="carousel-inner position-relative border border-light-subtle" id="carrusel">
-                    <h5 class="position-absolute z-3 text-white top-50 start-50 translate-middle">Amazing Events</h5>
+                    <h1
+                        class="text-info bg-success border border-info position-absolute z-3 text-white top-50 start-50 translate-middle">
+                        Amazing Events</h1>
                     <div class="carousel-item active">
                         <img src="./assets/images/optional_banner_1.jpg" class="d-block w-100" alt="museum.jpg">
                     </div>
@@ -79,74 +81,90 @@
                 </button>
             </div>
         </article>
-        <section class="d-flex p-2 py-2">
+        <section id="BUSCADOR" class="check-search d-flex gap-2 text-black flex-wrap p-3">
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                 <label class="form-check-label" for="flexCheckDefault">
+                    Category
                 </label>
             </div>
-            <p>Category</p>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                 <label class="form-check-label" for="flexCheckDefault">
+                    Category
                 </label>
             </div>
-            <p>Category</p>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                 <label class="form-check-label" for="flexCheckDefault">
+                    Category
                 </label>
             </div>
-            <p>Category</p>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                 <label class="form-check-label" for="flexCheckDefault">
+                    Category
                 </label>
             </div>
-            <p>Category</p>
+            <div class="form-check flex-lg-grow-1">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                    Category
+                </label>
+            </div>
+            <div id="BUSCADOR-2" class="justify-content-end">
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit"><img id="iconS"
+                            src="./assets/images/search.icon.png" alt=""></button>
+                </form>
+            </div>
         </section>
         <section id="cartas" class="d-flex gap-3 flex-wrap justify-content-center align-items-center pb-5">
             <article>
                 <div class="card shadow p-3 bg-success-subtle" style="width: 15rem;">
                     <img src="./assets/images/marathon.jpg" class="card-img-top" alt="Marathon.jpg">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                            of
-                            the
-                            card's content.</p>
-                        <a href="#" class="btn btn-primary">Details</a>
-                    </div>
+                        <h5 class="card-title h-50">10K for life</h5>
+                        <p class="card-text">Come and exercise, improve your health and lifestyle.</p>
+                        <div class="d-flex justify-content-between">
+                            <p class="card-text d-inline">$3</p>
+                            <a href="#" class="btn btn-primary">Details</a>
+                        </div>
             </article>
             </div>
             <div class="card shadow p-3 bg-success-subtle" style="width: 15rem;">
                 <img src="./assets/images/costume_party.jpg" class="card-img-top" alt="Marathon.jpg">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                        the
-                        card's content.</p>
-                    <a href="#" class="btn btn-primary">Details</a>
+                    <h5 class="card-title h-50">Halloween Night</h5>
+                    <p class="card-text">Come in your scariest costume character to win amazing prizes.</p>
+                    <div class="d-flex justify-content-between">
+                        <p class="card-text d-inline">$12</p>
+                        <a href="#" class="btn btn-primary">Details</a>
+                    </div>
                 </div>
             </div>
             <div class="card shadow p-3 bg-success-subtle" style="width: 15rem;">
                 <img src="./assets/images/music_concert.jpg" class="card-img-top" alt="Marathon.jpg">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                        the
-                        card's content.</p>
-                    <a href="#" class="btn btn-primary">Details</a>
+                    <h5 class="card-title h-50">Metallica in Concert</h5>
+                    <p class="card-text">The only concert of the most emblematic band in the world</p>
+                    <div class="d-flex justify-content-between">
+                        <p class="card-text d-inline">$150</p>
+                        <a href="#" class="btn btn-primary">Details</a>
+                    </div>
                 </div>
             </div>
             <div class="card shadow p-3 bg-success-subtle" style="width: 15rem;">
-                <img src="./assets/images/food_fair.jpg" class="card-img-top" alt="Marathon.jpg">
+                <img src="./assets/images/cinema.jpg" class="card-img-top" alt="Marathon.jpg">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                        the
-                        card's content.</p>
-                    <a href="#" class="btn btn-primary">Details</a>
+                    <h5 class="card-title h-50">Let's go to the cinema</h5>
+                    <p class="card-text">Marvel's Avengers 3d premiere the start of an epic saga with your best
+                        superheroes</p>
+                    <div class="d-flex justify-content-between">
+                        <p class="card-text d-inline">$250</p>
+                        <a href="#" class="btn btn-primary">Details</a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -162,7 +180,7 @@
                             src="./assets/images/whatsapp.png" class="w-50" alt="wa-icon"></a></button>
             </div>
             <div class="d-flex align-items-center">
-                <p class="text-end">COHORT</p>
+                <p class="text-end">COHORT 49</p>
             </div>
         </article>
     </footer>
