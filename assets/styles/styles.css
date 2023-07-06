@@ -4,6 +4,9 @@
 .layout{
     height: 80vh;
 }
+.layout2{
+    height: 95vh;
+}
 #iconS{
     height:1rem;
 }
@@ -15,4 +18,7 @@
 }
 .cards{
     margin: 1rem;
+}
+#cartas img{
+    object-fit: contain;
 }
