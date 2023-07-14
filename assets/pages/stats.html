@@ -9,12 +9,18 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
 </head>
 
 <body class="bg-info-subtle">
     <header class="container-fluid">
         <div class="contenedor d-flex col-12 rounded">
-            <nav class="navbar navbar-expand-lg bg-body-tertiary col-12 rounded">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary col-12 rounded" data-bs-theme="dark">
                 <div class="container-fluid">
                     <img class="navbar-brand img-fluid col-2" src="../images/amazing_brand.png" alt="Logo">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -24,26 +30,26 @@
                     <div class="collapse navbar-collapse position-relative justify-content-end" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link text-center text-primary btn btn-outline-info shadow p-3"
+                                <a class="nav-link text-center text-light btn btn-success shadow p-3"
                                     aria-current="page" href="../../index.html">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-center text-primary btn btn-outline-info shadow p-3"
-                                    href="../pages/upcoming.html">Upcoming
+                                <a class="nav-link text-center text-light btn btn-success shadow p-3"
+                                    href="./upcoming.html">Upcoming
                                     Events</a>
                             </li>
                             <li class="nav-item text-center">
-                                <a class="nav-link text-primary btn btn-outline-info shadow p-3"
-                                    href="../pages/past.html">Past
+                                <a class="nav-link text-center text-light btn btn-success shadow p-3"
+                                    href="./past.html">Past
                                     Events</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-center text-primary btn btn-outline-info shadow p-3"
-                                    href="../pages/contact.html">Contact</a>
+                                <a class="nav-link text-center text-light btn btn-success shadow p-3"
+                                    href="./contact.html">Contact</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link disabled text-primary-emphasis btn btn-outline-info shadow p-3"
-                                    href="../pages/stats.html">Stats</a>
+                                <a class="nav-link disabled text-center text-light-emphasis shadow p-3"
+                                    href="#">Stats</a>
                             </li>
                         </ul>
                     </div>
@@ -56,9 +62,12 @@
             <div id="carouselExampleFade" class="carousel slide carousel-fade col-12">
 
                 <div class="carousel-inner position-relative border border-light-subtle" id="carrusel">
-                    <h1
-                        class="text-info bg-success border border-info position-absolute z-3 text-white top-50 start-50 translate-middle">
-                        Stats</h1>
+                    <div class="title-wrapper position-absolute z-3 top-50 start-50 translate-middle">
+                        <h1 class="sweet-title ">
+                            <span data-text="Sweet">Amazing</span>
+                            <span data-text="Stuff">Events</span>
+                        </h1>
+                    </div>
                     <div class="carousel-item active">
                         <img src="../images/optional_banner_1.jpg" class="d-block w-100" alt="food.jpg">
                     </div>

@@ -1,4 +1,3 @@
-
 let cards = document.getElementById("cartas")
 let current = data.currentDate
 let datos = data.events.filter(evento => evento.date < current)
@@ -6,29 +5,30 @@ let cat = datos.map(category => category.category)
 let newCat = new Set(cat)
 let categorias = Array.from(newCat)
 let checkbox = document.getElementById("buscador")
-let searchInput = document.getElementById("inputSearch")
+
 function createModel(evento) {
-    return `<div class="card shadow p-3 bg-success-subtle" style="width: 15rem;">
-    <img src="${evento.image}" class="card-img-top" alt="Image of: ${evento.name}">
-    <div class="card-body">
-        <h6 class="card-title h-50">${evento.name}</h6>
-        <p class="card-text">${evento.description}</p>
-        <div class="d-flex justify-content-between">
-            <p class="card-text d-inline">$${evento.price}</p>
-            <a href="./details.html?ID=${evento._id}" class="btn btn-primary">Details</a>
-        </div>
-    </div>
-</div>`
+    return `<div class="card shadow p-3 bg-info-subtle" style="width: 15rem; height: 25rem">
+      <img src="${evento.image}" class="card-img-top" alt="Image of: ${evento.name}">
+      <div class="card-body">
+          <h6 class="card-title h-25">${evento.name}</h6>
+          <p class="card-text">${evento.description}</p>
+          <div class="d-flex justify-content-between">
+              <p class="card-text d-inline">$${evento.price}</p>
+              <a href="./details.html?ID=${evento._id}" class="btn btn-primary">Details</a>
+          </div>
+      </div>
+  </div>`
 }
-function printModel(events, ubicacion) {
+
+function printModel(events) {
     let carta = ''
     if (events.length == 0) {
-        carta = `<p class="display-1">No coincidences</p>`
-        ubicacion.innerHTML = carta
+        carta = `<p class="display-1">Name event not found</p>`
+        cards.innerHTML = carta
         return;
     }
     for (let evento of events) {
-        ubicacion.innerHTML += createModel(evento)
+        cards.innerHTML += createModel(evento)
     }
 }
 
@@ -50,26 +50,33 @@ printCheckBox(categorias, checkbox)
 
 
 
+
+
 function filterEvents(dataCurrent) {
     let filteredEvents = []
 
     for (let evento of datos) {
-        if (evento.date > dataCurrent) {
+        if (evento.date < dataCurrent) {
             filteredEvents.push(evento)
         }
     }
     return filteredEvents
 }
 let filteredEvents = filterEvents(current)
-printModel(filteredEvents, cards)
+printModel(filteredEvents)
 
 
-
-
-
+let searchInput = document.getElementById("inputSearch")
+function printInput(form) {
+    form.innerHTML = `<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success" type="submit"><img id="iconS"
+            src="../images/search.icon.png" alt=""></button>`
+}
+printInput(searchInput)
 
 
 //Filter
+// showValue solo funciona con los checkbox. NO PREGUNTEN POR QUE
 function showValue(input) {
     let valorInputSearch = input.value
     return valorInputSearch
@@ -77,6 +84,7 @@ function showValue(input) {
 
 function SearchFilter(eventos, input) {
     let filterSearch = eventos.filter(evento => evento.name.toLowerCase().includes(input.toLowerCase()))
+    console.log(filterSearch);
     return filterSearch
 }
 
@@ -101,6 +109,7 @@ function crossFilter(arrayCat, searchValue) {
 
 
 
+
 //LISTENERS
 
 checkbox.addEventListener('change', () => {
@@ -111,10 +120,22 @@ checkbox.addEventListener('change', () => {
     printModel(catFilter, cards)
 })
 
-searchInput.addEventListener('input', () => {
+searchInput.addEventListener('input', (e) => {
     cards.innerHTML = ""
     let filtroCheck = checkFilter()
-    let values = showValue(searchInput)
+    let values = e.target.value
+    console.log(values)
     filterSearch = crossFilter(filtroCheck, values)
     printModel(filterSearch, cards)
 })
+
+
+
+
+
+
+
+
+
+
+
