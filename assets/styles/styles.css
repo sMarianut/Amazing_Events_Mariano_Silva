@@ -136,3 +136,6 @@ body{
       background-clip: text;
     }
   }
+.carta{
+    height: 25rem!important;
+}

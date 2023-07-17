@@ -1,15 +1,26 @@
 
+let datosEventos =
+  fetch('https://mindhub-xj03.onrender.com/api/amazing')
+    .then(respuesta => respuesta.json())
+    .then(data => {
+      datosEventos = data.events
+      console.log(datosEventos);
+      let cat = datosEventos.map(evento => evento.category)
+      console.log(cat);
+      let newCategories = Array.from(new Set(cat))
+      console.log(newCategories);
+      printCheckBox(newCategories, checkbox)
+    })
+    .catch(error => console.error(error.message))
+
 let cards = document.getElementById("cartas")
-let datos = data.events
-let cat = datos.map(category => category.category)
-let newCat = new Set(cat)
-let categorias = Array.from(newCat)
-let checkbox = document.getElementById("buscador")
-let searchInput = document.getElementById("inputSearch")
+// //let datos = data.events
+// let checkbox = document.getElementById("buscador")
+// let searchInput = document.getElementById("inputSearch")
 
 function createModel(evento) {
   return `<div class="card shadow p-3 bg-info-subtle" style="width: 15rem; height: 25rem">
-    <img src="${evento.image}" class="card-img-top" alt="Image of: ${evento.name}">
+    <img src="${evento.image}" class="card-img-top carta" style="height: 5rem" alt="Image of: ${evento.name}">
     <div class="card-body">
         <h6 class="card-title h-25">${evento.name}</h6>
         <p class="card-text">${evento.description}</p>
@@ -21,18 +32,18 @@ function createModel(evento) {
 </div>`
 }
 
-function printModel(events) {
+function printModel(events, ubi) {
   let card = ''
   if (events.length == 0) {
     card = `<p class="display-1">Name event not found</p>`
-    cards.innerHTML = card
+    ubi.innerHTML = card
     return;
   }
   for (let evento of events) {
-    cards.innerHTML += createModel(evento)
+    ubi.innerHTML += createModel(evento)
   }
 }
-printModel(datos)
+
 
 function createCheck(check) {
   return `<div class="form-check">
@@ -46,7 +57,7 @@ function printCheckBox(cat, cont) {
     cont.innerHTML += createCheck(elemento)
   }
 }
-printCheckBox(categorias, checkbox)
+
 
 function showValue(input) {
   let valorInputSearch = input.value
@@ -60,13 +71,15 @@ function SearchFilter(eventos, input) {
   let filterSearch = eventos.filter(evento => evento.name.toLowerCase().includes(input.toLowerCase()))
   return filterSearch
 }
-
+//Dependiendo de otros factores si quiero guardar algo en un array. Uso forEach
 function checkFilter() {
   let boxCheck = document.querySelectorAll("input[type='checkbox']:checked")
   let arrayCheck = []
   boxCheck.forEach((values) => arrayCheck.push(values.value))
   return arrayCheck
 }
+
+
 
 function crossFilter(arrayCat, searchValue) {
 
@@ -82,8 +95,7 @@ function crossFilter(arrayCat, searchValue) {
 
 
 
-
-//Listeners 
+//Listeners
 
 
 
