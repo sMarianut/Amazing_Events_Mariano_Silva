@@ -1,22 +1,32 @@
+const cards = document.getElementById("cartas")
+const checkbox = document.getElementById("buscador")
+const searchInput = document.getElementById("inputSearch")
 
 let datosEventos =
   fetch('https://mindhub-xj03.onrender.com/api/amazing')
     .then(respuesta => respuesta.json())
     .then(data => {
       datosEventos = data.events
-      console.log(datosEventos);
       let cat = datosEventos.map(evento => evento.category)
-      console.log(cat);
       let newCategories = Array.from(new Set(cat))
-      console.log(newCategories);
+      printModel(datosEventos, cards)
       printCheckBox(newCategories, checkbox)
+      searchInput.addEventListener('input', () => {
+        cards.innerHTML = ""
+        let filtroCheck = checkFilter()
+        let values = showValue(searchInput)
+        let filterSearch = crossFilter(filtroCheck, values)
+        printModel(filterSearch, cards)
+      })
+      checkbox.addEventListener('change', () => {
+        cards.innerHTML = ""
+        let filtroCheck = checkFilter()
+        let values = showValue(searchInput)
+        let catFilter = crossFilter(filtroCheck, values)
+        printModel(catFilter, cards)
+      })
     })
     .catch(error => console.error(error.message))
-
-let cards = document.getElementById("cartas")
-// //let datos = data.events
-// let checkbox = document.getElementById("buscador")
-// let searchInput = document.getElementById("inputSearch")
 
 function createModel(evento) {
   return `<div class="card shadow p-3 bg-info-subtle" style="width: 15rem; height: 25rem">
@@ -83,7 +93,7 @@ function checkFilter() {
 
 function crossFilter(arrayCat, searchValue) {
 
-  let crossFilter = datos;
+  let crossFilter = datosEventos;
   if (arrayCat.length > 0) {
     crossFilter = crossFilter.filter(evento => arrayCat.includes(evento.category))
   }
@@ -99,21 +109,9 @@ function crossFilter(arrayCat, searchValue) {
 
 
 
-checkbox.addEventListener('change', () => {
-  cards.innerHTML = ""
-  let filtroCheck = checkFilter()
-  let values = showValue(searchInput)
-  let catFilter = crossFilter(filtroCheck, values)
-  printModel(catFilter)
-})
 
-searchInput.addEventListener('input', () => {
-  cards.innerHTML = ""
-  let filtroCheck = checkFilter()
-  let values = showValue(searchInput)
-  filterSearch = crossFilter(filtroCheck, values)
-  printModel(filterSearch)
-})
+
+
 
 
 
