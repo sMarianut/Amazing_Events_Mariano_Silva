@@ -1,140 +1,58 @@
-let cards = document.getElementById("cartas")
-let current = data.currentDate
-let datos = data.events.filter(evento => evento.date < current)
-let cat = datos.map(category => category.category)
-let newCat = new Set(cat)
-let categorias = Array.from(newCat)
-let checkbox = document.getElementById("buscador")
+import { createModel2, printCheckBox, showValue, crossFilter } from "./modules/functions.js";
 
-function createModel(evento) {
-    return `<div class="card shadow p-3 bg-info-subtle" style="width: 15rem; height: 25rem">
-      <img src="${evento.image}" class="card-img-top" alt="Image of: ${evento.name}">
-      <div class="card-body">
-          <h6 class="card-title h-25">${evento.name}</h6>
-          <p class="card-text">${evento.description}</p>
-          <div class="d-flex justify-content-between">
-              <p class="card-text d-inline">$${evento.price}</p>
-              <a href="./details.html?ID=${evento._id}" class="btn btn-primary">Details</a>
-          </div>
-      </div>
-  </div>`
-}
+const cards = document.getElementById("cartas")
+const checkbox = document.getElementById("idCheck")
+const searchInput = document.getElementById("inputSearch")
+const inputForm = document.getElementById("formInput")
+let current;
+let datosEventos;
+fetch('https://mindhub-xj03.onrender.com/api/amazing')
+    .then(respuesta => respuesta.json())
+    .then(data => {
+        current = data.currentDate
+        datosEventos = data.events.filter(evento => evento.date < current)
+        console.log(datosEventos);
+        let cat = datosEventos.map(evento => evento.category)
+        let newCategories = Array.from(new Set(cat))
+        createModel2(datosEventos)
+        printModel(datosEventos, cards)
+        printCheckBox(newCategories, checkbox)
+    })
+    .catch(error => console.error(error.message))
 
-function printModel(events) {
-    let carta = ''
+function printModel(events, ubi) {
+    let card = ''
     if (events.length == 0) {
-        carta = `<p class="display-1">Name event not found</p>`
-        cards.innerHTML = carta
+        card = `<p class="display-1">Name event not found</p>`
+        ubi.innerHTML = card
         return;
     }
     for (let evento of events) {
-        cards.innerHTML += createModel(evento)
+        ubi.innerHTML += createModel2(evento)
     }
 }
 
-function createCheck(check) {
-    return `<div class="form-check">
-    <input class="form-check-input" type="checkbox" value="${check}" id="${check}">
-    <label class="form-check-label" for="${check}">
-        ${check}
-    </label>
-    </div>`
-}
-
-function printCheckBox(cat, cont) {
-    for (const elemento of cat) {
-        cont.innerHTML += createCheck(elemento)
-    }
-}
-printCheckBox(categorias, checkbox)
+//Listeners
 
 
-
-
-
-function filterEvents(dataCurrent) {
-    let filteredEvents = []
-
-    for (let evento of datos) {
-        if (evento.date < dataCurrent) {
-            filteredEvents.push(evento)
-        }
-    }
-    return filteredEvents
-}
-let filteredEvents = filterEvents(current)
-printModel(filteredEvents)
-
-
-let searchInput = document.getElementById("inputSearch")
-function printInput(form) {
-    form.innerHTML = `<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success" type="submit"><img id="iconS"
-            src="../images/search.icon.png" alt=""></button>`
-}
-printInput(searchInput)
-
-
-//Filter
-// showValue solo funciona con los checkbox. NO PREGUNTEN POR QUE
-function showValue(input) {
-    let valorInputSearch = input.value
-    return valorInputSearch
-}
-
-function SearchFilter(eventos, input) {
-    let filterSearch = eventos.filter(evento => evento.name.toLowerCase().includes(input.toLowerCase()))
-    console.log(filterSearch);
-    return filterSearch
-}
-
-function checkFilter() {
+searchInput.addEventListener('input', () => {
     let boxCheck = document.querySelectorAll("input[type='checkbox']:checked")
     let arrayCheck = []
-    boxCheck.forEach((values) => arrayCheck.push(values.value))
-    return arrayCheck
-}
-
-function crossFilter(arrayCat, searchValue) {
-    let crossFilter = datos;
-    if (arrayCat.length > 0) {
-        crossFilter = crossFilter.filter(evento => arrayCat.includes(evento.category))
-    }
-    if (searchValue) {
-        crossFilter = crossFilter.filter(evento => evento.name.toLowerCase().includes(searchValue.toLowerCase()))
-    }
-    return crossFilter
-}
-
-
-
-
-
-//LISTENERS
-
-checkbox.addEventListener('change', () => {
-    cards.innerHTML = ""
-    let filtroCheck = checkFilter()
     let values = showValue(searchInput)
-    let catFilter = crossFilter(filtroCheck, values)
-    printModel(catFilter, cards)
-})
-
-searchInput.addEventListener('input', (e) => {
+    boxCheck.forEach((values) => arrayCheck.push(values.value))
     cards.innerHTML = ""
-    let filtroCheck = checkFilter()
-    let values = e.target.value
-    console.log(values)
-    filterSearch = crossFilter(filtroCheck, values)
-    printModel(filterSearch, cards)
+    let filtroCruzado = crossFilter(datosEventos, values, arrayCheck)
+    printModel(filtroCruzado, cards)
 })
-
-
-
-
-
-
-
+checkbox.addEventListener('change', () => {
+    let boxCheck = document.querySelectorAll("input[type='checkbox']:checked")
+    let arrayCheck = []
+    let values = showValue(searchInput)
+    boxCheck.forEach((values) => arrayCheck.push(values.value))
+    cards.innerHTML = ""
+    let filtroCruzado = crossFilter(datosEventos, values, arrayCheck)
+    printModel(filtroCruzado, cards)
+})
 
 
 
